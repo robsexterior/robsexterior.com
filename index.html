@@ -80,11 +80,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"/></noscript>
 
 <style>
-/* Critical above-fold CSS — renders before external fonts/styles load */
-body{font-family:Arial,sans-serif;margin:0;background:#080808;}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:transparent;}
-.hero{min-height:100vh;background:linear-gradient(175deg,#0a1628 0%,#0E1A2B 40%,#162d55 100%);display:flex;align-items:center;justify-content:center;color:#fff;}
-</style>
+:root {
   --navy: #1B3461;
   --navy-dark: #0E1A2B;
   --navy-mid: #243d73;
@@ -740,8 +736,14 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
     </div>
     <div class="about-visual reveal-right">
       <div class="about-photo">
-        <span style="font-size:40px">📸</span>
-        <span>Add Photo of Rob</span>
+        <img
+          src="https://maps.googleapis.com/maps/api/staticmap?center=Woodstock,IL&zoom=11&size=600x450&scale=2&maptype=roadmap&style=element:geometry%7Ccolor:0x1d2c4d&style=element:labels.text.fill%7Ccolor:0x8ec3b9&style=element:labels.text.stroke%7Ccolor:0x1a3646&style=feature:road%7Celement:geometry%7Ccolor:0x304a7d&style=feature:water%7Ccolor:0x0e1626&markers=color:0xC9A84C%7CWoodstock,IL&key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"
+          alt="Rob's Exterior Services — Woodstock IL service area map"
+          width="600" height="450"
+          loading="lazy"
+          onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;\'><div style=\'font-size:48px\'>📍</div><div style=\'font-family:Oswald,sans-serif;font-size:18px;color:var(--gold);letter-spacing:3px;\'>WOODSTOCK, IL</div><div style=\'font-size:13px;color:rgba(255,255,255,0.5);text-align:center;line-height:1.8;\'>Serving Woodstock · Crystal Lake<br/>Huntley · Algonquin<br/>McHenry County</div></div>'"
+          style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:4px;"
+        />
       </div>
       <div class="about-badge">
         <span class="big">Local</span>
