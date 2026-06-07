@@ -422,6 +422,28 @@ section{padding:110px 24px;}
 .gallery-item:hover .overlay{opacity:1;}
 .gallery-item .ph{position:relative;z-index:1;font-size:28px;}
 .gallery-item.featured{grid-column:span 2;}
+.gallery-label{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 14px;
+  background:linear-gradient(to top,rgba(14,26,43,0.9),transparent);
+  color:var(--white);font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;z-index:2;
+  transform:translateY(4px);opacity:0;
+  transition:opacity 0.3s,transform 0.3s;
+  border-radius:0 0 4px 4px;
+}
+.gallery-item:hover .gallery-label{opacity:1;transform:translateY(0);}
+.gf-btn{
+  font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:10px 20px;border-radius:3px;cursor:pointer;
+  border:1px solid rgba(201,168,76,0.3);
+  background:transparent;color:rgba(255,255,255,0.45);
+  transition:all 0.2s;
+}
+.gf-btn:hover{border-color:var(--gold);color:var(--gold);}
+.gf-btn.active{background:var(--gold);color:var(--navy-dark);border-color:var(--gold);}
+.gallery-item.hidden{display:none;}
 
 /* ── TESTIMONIALS ── */
 #testimonials{
@@ -568,7 +590,9 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
 
 <!-- NAV -->
 <nav id="mainNav" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="Rob's Exterior Services home">ROB'S <span>EXTERIOR</span></a>
+  <a href="#" class="nav-logo" aria-label="Rob's Exterior Services home">
+    <img src="images/logo.png" alt="Rob's Exterior Services Logo" style="height:48px;width:auto;display:block;"/>
+  </a>
   <ul class="nav-links" id="navLinks" role="list">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
@@ -589,6 +613,7 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
   <div class="hero-content">
+    <img src="images/logo.png" alt="Rob's Exterior Services — Woodstock's Exterior Experts" style="height:clamp(100px,18vw,160px);width:auto;margin:0 auto 24px;display:block;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.5));opacity:0;animation:heroFadeUp 0.8s 0.15s forwards;"/>
     <p class="hero-eyebrow">Woodstock's Exterior Experts</p>
     <h1 class="hero-h1">
       ROB'S
@@ -728,12 +753,199 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
       <h2 class="section-title reveal" id="gallery-title" style="transition-delay:0.1s">The Work <span class="gold">Speaks</span></h2>
       <p class="section-body reveal" style="transition-delay:0.2s">Real results from real Woodstock-area homes. Replace the placeholders below with Rob's actual project photos.</p>
     </div>
-    <div class="gallery-grid">
-      <div class="gallery-item featured reveal" style="transition-delay:0.05s"><div class="overlay"></div><span class="ph">📸</span><span>Add Featured Photo</span></div>
-      <div class="gallery-item reveal" style="transition-delay:0.15s"><div class="overlay"></div><span class="ph">📸</span><span>Add Photo</span></div>
-      <div class="gallery-item reveal" style="transition-delay:0.1s"><div class="overlay"></div><span class="ph">📸</span><span>Add Photo</span></div>
-      <div class="gallery-item reveal" style="transition-delay:0.2s"><div class="overlay"></div><span class="ph">📸</span><span>Add Photo</span></div>
-      <div class="gallery-item reveal" style="transition-delay:0.25s"><div class="overlay"></div><span class="ph">📸</span><span>Add Photo</span></div>
+    <!-- FILTER TABS -->
+    <div class="gallery-filters reveal" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;">
+      <button class="gf-btn active" data-filter="all">All Work</button>
+      <button class="gf-btn" data-filter="windows">Window Cleaning</button>
+      <button class="gf-btn" data-filter="gutters">Gutter Cleaning</button>
+      <button class="gf-btn" data-filter="siding">Soft Washing</button>
+      <button class="gf-btn" data-filter="patio">Pressure Washing</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- HERO SHOT — curb appeal finished home -->
+      <div class="gallery-item featured reveal" data-cat="siding" style="transition-delay:0.05s">
+        <img src="images/front_of_house_1_.jpeg" alt="Soft washed home exterior Woodstock IL — Rob's Exterior Services curb appeal result" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Curb Appeal</div>
+      </div>
+
+      <!-- Window cleaning action 1 -->
+      <div class="gallery-item reveal" data-cat="windows" style="transition-delay:0.1s">
+        <img src="images/exterior_window_1_.jpeg" alt="Professional window cleaning on ladder Woodstock Illinois" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Window Cleaning</div>
+      </div>
+
+      <!-- Window cleaning action 2 — branded shirt -->
+      <div class="gallery-item reveal" data-cat="windows" style="transition-delay:0.15s">
+        <img src="images/exterior_window_2_.jpeg" alt="Rob's Exterior Services window cleaning residential Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Window Cleaning</div>
+      </div>
+
+      <!-- Window cleaning commercial -->
+      <div class="gallery-item reveal" data-cat="windows" style="transition-delay:0.2s">
+        <img src="images/exterior_window_3_.jpeg" alt="Commercial window cleaning McHenry County Illinois" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Commercial Windows</div>
+      </div>
+
+      <!-- Gutter before 1 -->
+      <div class="gallery-item reveal" data-cat="gutters" style="transition-delay:0.1s">
+        <img src="images/gutter_1_.jpeg" alt="Clogged gutters full of debris before cleaning — Woodstock IL gutter cleaning service" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Gutter Cleaning · Before</div>
+      </div>
+
+      <!-- Gutter before 2 -->
+      <div class="gallery-item reveal" data-cat="gutters" style="transition-delay:0.15s">
+        <img src="images/gutter_2_.jpeg" alt="Overflowing gutters packed with leaves before Rob's Exterior Services gutter cleaning" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Gutter Cleaning · Before</div>
+      </div>
+
+      <!-- Garage gutter detail 1 -->
+      <div class="gallery-item reveal" data-cat="gutters" style="transition-delay:0.2s">
+        <img src="images/garage_1.jpeg" alt="Gutter inspection and cleaning on residential garage McHenry County IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Gutter Detail</div>
+      </div>
+
+      <!-- Garage gutter detail 2 (after) -->
+      <div class="gallery-item reveal" data-cat="gutters" style="transition-delay:0.25s">
+        <img src="images/garage_2.jpeg" alt="Clean gutters after service — Rob's Exterior Services Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Gutter Detail · After</div>
+      </div>
+
+      <!-- Siding before shots -->
+      <div class="gallery-item featured reveal" data-cat="siding" style="transition-delay:0.05s">
+        <img src="images/siding_6.jpeg" alt="Siding with mold and algae buildup before soft washing — Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Before</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.1s">
+        <img src="images/siding_9.jpeg" alt="Soft washing residential siding before treatment McHenry County" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Before</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.15s">
+        <img src="images/siding_10.jpeg" alt="House siding algae and mold removal soft wash Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Before</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.2s">
+        <img src="images/siding_11.jpeg" alt="Exterior siding soft wash service — Rob's Exterior Services" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Before</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.1s">
+        <img src="images/siding_3_.jpeg" alt="Soft wash siding cleaning result Woodstock Illinois home" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.15s">
+        <img src="images/siding_4_.jpeg" alt="Residential siding after soft wash service McHenry County" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.2s">
+        <img src="images/siding_5_.jpeg" alt="Home exterior soft washing Woodstock IL — mold and mildew removal" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash</div>
+      </div>
+
+      <!-- Patio pressure washing -->
+      <div class="gallery-item reveal" data-cat="patio" style="transition-delay:0.1s">
+        <img src="images/patio_1.jpeg" alt="Backyard patio pressure washing in progress — Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Pressure Washing · Patio</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="patio" style="transition-delay:0.15s">
+        <img src="images/patio_2_.jpeg" alt="Concrete patio pressure washed clean — Rob's Exterior Services" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Pressure Washing · Patio</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="patio" style="transition-delay:0.2s">
+        <img src="images/patio_3_.jpeg" alt="Patio and concrete cleaning service McHenry County Illinois" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Pressure Washing</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="patio" style="transition-delay:0.25s">
+        <img src="images/patio_4.jpeg" alt="Before and after patio pressure washing Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Pressure Washing · Before</div>
+      </div>
+
+      <!-- Second batch — navy house money shots -->
+      <div class="gallery-item featured reveal" data-cat="siding" style="transition-delay:0.05s">
+        <img src="images/front_of_house_2_.jpeg" alt="Beautiful navy blue home exterior soft washed — Rob's Exterior Services Woodstock IL curb appeal" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Curb Appeal</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.1s">
+        <img src="images/front_of_house_3_.jpeg" alt="Premium home exterior cleaning result McHenry County Illinois" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · Curb Appeal</div>
+      </div>
+
+      <!-- Gutter before extra -->
+      <div class="gallery-item reveal" data-cat="gutters" style="transition-delay:0.15s">
+        <img src="images/e99a34d5-e4f9-45f4-873d-17003588d4db.jpeg" alt="Severely clogged gutters before cleaning — gutter cleaning Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Gutter Cleaning · Before</div>
+      </div>
+
+      <!-- House wash afters -->
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.1s">
+        <img src="images/housewash_1.jpeg" alt="House soft wash complete — bright clean siding after treatment Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">House Wash · After</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.15s">
+        <img src="images/housewash_2_.jpeg" alt="Residential soft wash service result McHenry County — clean white siding" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">House Wash · After</div>
+      </div>
+
+      <!-- Siding after shots — clean results -->
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.1s">
+        <img src="images/siding_1_.jpeg" alt="Siding after soft wash service — spotless clean exterior Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · After</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.15s">
+        <img src="images/siding_2_.jpeg" alt="Clean vinyl siding after soft washing — Rob's Exterior Services" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · After</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.2s">
+        <img src="images/siding_7.jpeg" alt="Exterior siding cleaning complete — bright clean result McHenry County" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · After</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.25s">
+        <img src="images/siding_8.jpeg" alt="Soft washed siding after service — mold and algae removed Woodstock IL" loading="lazy"/>
+        <div class="overlay"></div>
+        <div class="gallery-label">Soft Wash · After</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -915,6 +1127,22 @@ document.querySelectorAll('.gallery-item').forEach(card => {
   });
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
+  });
+});
+
+// ── GALLERY FILTER ──
+document.querySelectorAll('.gf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('#galleryGrid .gallery-item').forEach(item => {
+      if (filter === 'all' || item.dataset.cat === filter) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
   });
 });
 
