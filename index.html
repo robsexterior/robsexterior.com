@@ -75,10 +75,16 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+<!-- Non-render-blocking font load -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"/></noscript>
 
 <style>
-:root {
+/* Critical above-fold CSS — renders before external fonts/styles load */
+body{font-family:Arial,sans-serif;margin:0;background:#080808;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:transparent;}
+.hero{min-height:100vh;background:linear-gradient(175deg,#0a1628 0%,#0E1A2B 40%,#162d55 100%);display:flex;align-items:center;justify-content:center;color:#fff;}
+</style>
   --navy: #1B3461;
   --navy-dark: #0E1A2B;
   --navy-mid: #243d73;
@@ -364,17 +370,22 @@ section{padding:110px 24px;}
 }
 .stat-label{font-size:11px;color:var(--gray,#888);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;}
 .about-visual{position:relative;}
-.about-photo{
+.about-map{
   width:100%;aspect-ratio:4/3;
-  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);
   border-radius:4px;overflow:hidden;position:relative;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:12px;
-  color:rgba(255,255,255,0.25);font-size:12px;letter-spacing:2px;text-transform:uppercase;
-  border:1px solid rgba(201,168,76,0.2);
+  border:1px solid rgba(201,168,76,0.25);
+  box-shadow:0 8px 40px rgba(0,0,0,0.15);
 }
-.about-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
-.about-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);}
+.about-map::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);z-index:2;}
+.map-overlay{
+  position:absolute;bottom:16px;left:16px;z-index:3;
+  background:rgba(14,26,43,0.92);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:4px;
+  padding:14px 18px;
+  pointer-events:none;
+}
 .about-badge{
   position:absolute;bottom:-20px;right:-20px;
   width:120px;height:120px;background:var(--gold);border-radius:50%;
@@ -591,7 +602,7 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
 <!-- NAV -->
 <nav id="mainNav" role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-logo" aria-label="Rob's Exterior Services home">
-    <img src="images/ChatGPT%20Image%20Jun%206,%202026,%2002_19_11%20AM.png" alt="Rob's Exterior Services Logo" style="height:48px;width:auto;display:block;"/>
+    <img src="images/ChatGPT%20Image%20Jun%206,%202026,%2002_19_11%20AM.png" width="800" height="600" alt="Rob's Exterior Services Logo" width="120" height="48" style="height:48px;width:auto;display:block;"/>
   </a>
   <ul class="nav-links" id="navLinks" role="list">
     <li><a href="#services">Services</a></li>
@@ -613,7 +624,7 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
   <div class="hero-content">
-    <img src="images/ChatGPT%20Image%20Jun%206,%202026,%2002_19_11%20AM.png" alt="Rob's Exterior Services — Woodstock's Exterior Experts" style="height:clamp(100px,18vw,160px);width:auto;margin:0 auto 24px;display:block;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.5));opacity:0;animation:heroFadeUp 0.8s 0.15s forwards;"/>
+    <img src="images/ChatGPT%20Image%20Jun%206,%202026,%2002_19_11%20AM.png" width="800" height="600" alt="Rob's Exterior Services — Woodstock's Exterior Experts" fetchpriority="high" width="400" height="400" style="height:clamp(100px,18vw,160px);width:auto;margin:0 auto 24px;display:block;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.5));opacity:0;animation:heroFadeUp 0.8s 0.15s forwards;"/>
     <p class="hero-eyebrow">Woodstock's Exterior Experts</p>
     <h1 class="hero-h1">
       ROB'S
@@ -733,9 +744,23 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
       </div>
     </div>
     <div class="about-visual reveal-right">
-      <div class="about-photo">
-        <span style="font-size:40px">📸</span>
-        <span>Add Photo of Rob</span>
+      <div class="about-map">
+        <iframe
+          title="Rob's Exterior Services — Woodstock IL Service Area"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95068.23!2d-88.5487!3d42.2814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880f1234567890ab%3A0x1234567890abcdef!2sWoodstock%2C%20IL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+          width="100%"
+          height="100%"
+          style="border:0;position:absolute;inset:0;border-radius:4px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-overlay">
+          <div class="map-badge-inner">
+            <div style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Service Area</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">Woodstock · Crystal Lake<br/>Huntley · Algonquin<br/>McHenry County, IL</div>
+          </div>
+        </div>
       </div>
       <div class="about-badge">
         <span class="big">Local</span>
@@ -765,46 +790,46 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
 
       <!-- Row 1: Money shot + action shot -->
       <div class="gallery-item featured reveal" data-cat="siding" style="transition-delay:0.05s">
-        <img src="images/front%20of%20house%202%20.jpeg" alt="Beautiful navy blue home exterior soft washed — Rob's Exterior Services Woodstock IL" loading="lazy"/>
+        <img src="images/front%20of%20house%202%20.jpeg" width="800" height="600" alt="Beautiful navy blue home exterior soft washed — Rob's Exterior Services Woodstock IL" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Soft Wash · Curb Appeal</div>
       </div>
       <div class="gallery-item reveal" data-cat="windows" style="transition-delay:0.1s">
-        <img src="images/exterior%20window%201%20.jpeg" alt="Professional window cleaning on ladder Woodstock Illinois" loading="lazy"/>
+        <img src="images/exterior%20window%201%20.jpeg" width="800" height="600" alt="Professional window cleaning on ladder Woodstock Illinois" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Window Cleaning</div>
       </div>
 
       <!-- Row 2: Three even -->
       <div class="gallery-item reveal" data-cat="windows" style="transition-delay:0.1s">
-        <img src="images/exterior%20window%202%20.jpeg" alt="Rob's Exterior Services crew window cleaning residential Woodstock IL" loading="lazy"/>
+        <img src="images/exterior%20window%202%20.jpeg" width="800" height="600" alt="Rob's Exterior Services crew window cleaning residential Woodstock IL" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Window Cleaning</div>
       </div>
       <div class="gallery-item reveal" data-cat="gutters" style="transition-delay:0.15s">
-        <img src="images/gutter%201%20.jpeg" alt="Clogged gutters before cleaning — Woodstock IL gutter cleaning service" loading="lazy"/>
+        <img src="images/gutter%201%20.jpeg" width="800" height="600" alt="Clogged gutters before cleaning — Woodstock IL gutter cleaning service" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Gutter Cleaning · Before</div>
       </div>
       <div class="gallery-item reveal" data-cat="patio" style="transition-delay:0.2s">
-        <img src="images/patio%203%20.jpeg" alt="Patio pressure washing service McHenry County Illinois" loading="lazy"/>
+        <img src="images/patio%203%20.jpeg" width="800" height="600" alt="Patio pressure washing service McHenry County Illinois" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Pressure Washing</div>
       </div>
 
       <!-- Row 3: Before/after siding story -->
       <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.1s">
-        <img src="images/siding%209.jpeg" alt="House siding with algae buildup before soft washing Woodstock IL" loading="lazy"/>
+        <img src="images/siding%209.jpeg" width="800" height="600" alt="House siding with algae buildup before soft washing Woodstock IL" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Soft Wash · Before</div>
       </div>
       <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.15s">
-        <img src="images/siding%201%20.jpeg" alt="Clean siding after soft wash service — Rob's Exterior Services" loading="lazy"/>
+        <img src="images/siding%201%20.jpeg" width="800" height="600" alt="Clean siding after soft wash service — Rob's Exterior Services" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Soft Wash · After</div>
       </div>
       <div class="gallery-item reveal" data-cat="siding" style="transition-delay:0.2s">
-        <img src="images/front%20of%20house%203%20.jpeg" alt="Premium home exterior curb appeal result McHenry County Illinois" loading="lazy"/>
+        <img src="images/front%20of%20house%203%20.jpeg" width="800" height="600" alt="Premium home exterior curb appeal result McHenry County Illinois" loading="lazy"/>
         <div class="overlay"></div>
         <div class="gallery-label">Curb Appeal · After</div>
       </div>
@@ -814,26 +839,26 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
     <!-- Hidden full gallery — all photos -->
     <div id="fullGallery" style="display:none;">
       <div class="gallery-grid" style="margin-top:12px;">
-        <div class="gallery-item featured" data-cat="siding"><img src="images/front%20of%20house%201%20.jpeg" alt="Soft washed home Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Curb Appeal</div></div>
-        <div class="gallery-item" data-cat="windows"><img src="images/exterior%20window%203%20.jpeg" alt="Commercial window cleaning McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Commercial Windows</div></div>
-        <div class="gallery-item" data-cat="gutters"><img src="images/gutter%202%20.jpeg" alt="Packed gutters before cleaning Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Cleaning · Before</div></div>
-        <div class="gallery-item" data-cat="gutters"><img src="images/e99a34d5-e4f9-45f4-873d-17003588d4db.jpeg" alt="Severely clogged gutters before cleaning" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Cleaning · Before</div></div>
-        <div class="gallery-item" data-cat="gutters"><img src="images/garage%201.jpeg" alt="Gutter inspection residential garage McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Detail</div></div>
-        <div class="gallery-item" data-cat="gutters"><img src="images/garage%202.jpeg" alt="Clean gutters after service Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Detail · After</div></div>
-        <div class="gallery-item featured" data-cat="siding"><img src="images/siding%206.jpeg" alt="Siding mold buildup before soft washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Before</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%2010.jpeg" alt="House siding algae removal soft wash Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Before</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%2011.jpeg" alt="Exterior siding soft wash service" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Before</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%203%20.jpeg" alt="Soft wash siding result Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%204%20.jpeg" alt="Residential siding after soft wash McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%205%20.jpeg" alt="Home exterior soft washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%202%20.jpeg" alt="Clean vinyl siding after soft washing" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%207.jpeg" alt="Exterior siding clean result McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/siding%208.jpeg" alt="Soft washed siding mold removed Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/housewash%201.jpeg" alt="House soft wash complete clean siding Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">House Wash · After</div></div>
-        <div class="gallery-item" data-cat="siding"><img src="images/housewash%202%20.jpeg" alt="Residential soft wash result McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">House Wash · After</div></div>
-        <div class="gallery-item" data-cat="patio"><img src="images/patio%201.jpeg" alt="Backyard patio pressure washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Pressure Washing · Patio</div></div>
-        <div class="gallery-item" data-cat="patio"><img src="images/patio%202%20.jpeg" alt="Concrete patio pressure washed clean" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Pressure Washing · Patio</div></div>
-        <div class="gallery-item" data-cat="patio"><img src="images/patio%204.jpeg" alt="Before and after patio pressure washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Pressure Washing · Before</div></div>
+        <div class="gallery-item featured" data-cat="siding"><img src="images/front%20of%20house%201%20.jpeg" width="800" height="600" alt="Soft washed home Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Curb Appeal</div></div>
+        <div class="gallery-item" data-cat="windows"><img src="images/exterior%20window%203%20.jpeg" width="800" height="600" alt="Commercial window cleaning McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Commercial Windows</div></div>
+        <div class="gallery-item" data-cat="gutters"><img src="images/gutter%202%20.jpeg" width="800" height="600" alt="Packed gutters before cleaning Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Cleaning · Before</div></div>
+        <div class="gallery-item" data-cat="gutters"><img src="images/e99a34d5-e4f9-45f4-873d-17003588d4db.jpeg" width="800" height="600" alt="Severely clogged gutters before cleaning" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Cleaning · Before</div></div>
+        <div class="gallery-item" data-cat="gutters"><img src="images/garage%201.jpeg" width="800" height="600" alt="Gutter inspection residential garage McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Detail</div></div>
+        <div class="gallery-item" data-cat="gutters"><img src="images/garage%202.jpeg" width="800" height="600" alt="Clean gutters after service Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Gutter Detail · After</div></div>
+        <div class="gallery-item featured" data-cat="siding"><img src="images/siding%206.jpeg" width="800" height="600" alt="Siding mold buildup before soft washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Before</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%2010.jpeg" width="800" height="600" alt="House siding algae removal soft wash Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Before</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%2011.jpeg" width="800" height="600" alt="Exterior siding soft wash service" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · Before</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%203%20.jpeg" width="800" height="600" alt="Soft wash siding result Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%204%20.jpeg" width="800" height="600" alt="Residential siding after soft wash McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%205%20.jpeg" width="800" height="600" alt="Home exterior soft washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%202%20.jpeg" width="800" height="600" alt="Clean vinyl siding after soft washing" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%207.jpeg" width="800" height="600" alt="Exterior siding clean result McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/siding%208.jpeg" width="800" height="600" alt="Soft washed siding mold removed Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Soft Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/housewash%201.jpeg" width="800" height="600" alt="House soft wash complete clean siding Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">House Wash · After</div></div>
+        <div class="gallery-item" data-cat="siding"><img src="images/housewash%202%20.jpeg" width="800" height="600" alt="Residential soft wash result McHenry County" loading="lazy"/><div class="overlay"></div><div class="gallery-label">House Wash · After</div></div>
+        <div class="gallery-item" data-cat="patio"><img src="images/patio%201.jpeg" width="800" height="600" alt="Backyard patio pressure washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Pressure Washing · Patio</div></div>
+        <div class="gallery-item" data-cat="patio"><img src="images/patio%202%20.jpeg" width="800" height="600" alt="Concrete patio pressure washed clean" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Pressure Washing · Patio</div></div>
+        <div class="gallery-item" data-cat="patio"><img src="images/patio%204.jpeg" width="800" height="600" alt="Before and after patio pressure washing Woodstock IL" loading="lazy"/><div class="overlay"></div><div class="gallery-label">Pressure Washing · Before</div></div>
       </div>
     </div>
 
