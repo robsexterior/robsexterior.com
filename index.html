@@ -370,22 +370,17 @@ section{padding:110px 24px;}
 }
 .stat-label{font-size:11px;color:var(--gray,#888);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;}
 .about-visual{position:relative;}
-.about-map{
+.about-photo{
   width:100%;aspect-ratio:4/3;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);
   border-radius:4px;overflow:hidden;position:relative;
-  border:1px solid rgba(201,168,76,0.25);
-  box-shadow:0 8px 40px rgba(0,0,0,0.15);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+  color:rgba(255,255,255,0.25);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid rgba(201,168,76,0.2);
 }
-.about-map::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);z-index:2;}
-.map-overlay{
-  position:absolute;bottom:16px;left:16px;z-index:3;
-  background:rgba(14,26,43,0.92);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(201,168,76,0.3);
-  border-radius:4px;
-  padding:14px 18px;
-  pointer-events:none;
-}
+.about-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.about-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);}
 .about-badge{
   position:absolute;bottom:-20px;right:-20px;
   width:120px;height:120px;background:var(--gold);border-radius:50%;
@@ -744,23 +739,9 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:72px
       </div>
     </div>
     <div class="about-visual reveal-right">
-      <div class="about-map">
-        <iframe
-          title="Rob's Exterior Services — Woodstock IL Service Area"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95068.23!2d-88.5487!3d42.2814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880f1234567890ab%3A0x1234567890abcdef!2sWoodstock%2C%20IL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-          width="100%"
-          height="100%"
-          style="border:0;position:absolute;inset:0;border-radius:4px;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-        <div class="map-overlay">
-          <div class="map-badge-inner">
-            <div style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Service Area</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">Woodstock · Crystal Lake<br/>Huntley · Algonquin<br/>McHenry County, IL</div>
-          </div>
-        </div>
+      <div class="about-photo">
+        <span style="font-size:40px">📸</span>
+        <span>Add Photo of Rob</span>
       </div>
       <div class="about-badge">
         <span class="big">Local</span>
