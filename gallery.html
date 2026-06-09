@@ -298,11 +298,12 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
 
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filterBar">
-  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count" id="count-all">28</span></button>
+  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count" id="count-all">37</span></button>
   <button class="filter-btn" data-filter="siding">Soft Washing <span class="filter-count" id="count-siding">0</span></button>
   <button class="filter-btn" data-filter="windows">Window Cleaning <span class="filter-count" id="count-windows">0</span></button>
   <button class="filter-btn" data-filter="gutters">Gutter Cleaning <span class="filter-count" id="count-gutters">0</span></button>
   <button class="filter-btn" data-filter="patio">Pressure Washing <span class="filter-count" id="count-patio">0</span></button>
+  <button class="filter-btn" data-filter="roofwash">Roof Washing <span class="filter-count" id="count-roofwash">0</span></button>
   <button class="filter-btn" data-filter="lawn">Lawn Clean-Up <span class="filter-count" id="count-lawn">0</span></button>
 </div>
 
@@ -459,6 +460,46 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
       <div class="photo-overlay"><span class="photo-tag">Pressure Washing · Before</span></div>
     </div>
 
+      <!-- Roof washing -->
+      <div class="photo-item reveal" data-cat="roofwash" data-label="Roof Washing · Before & After">
+        <img src="images/roof_wash_1.jpeg" alt="Roof washing before and after Woodstock IL — black streak algae removal" width="900" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Roof Wash · Before & After</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="roofwash" data-label="Roof Washing · Before & After">
+        <img src="images/roof_wash_2.jpg" alt="Roof soft wash before and after McHenry County Illinois" width="900" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Roof Wash · Before & After</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="roofwash" data-label="Roof Washing · In Progress">
+        <img src="images/roof_wash_3.jpeg" alt="Roof washing soft wash treatment applied Woodstock IL" width="900" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Roof Wash · In Progress</span></div>
+      </div>
+
+      <!-- Lawn cleanup -->
+      <div class="photo-item reveal" data-cat="lawn" data-label="Lawn Clean-Up">
+        <img src="images/lawn_cleanup_1.jpeg" alt="Lawn clean-up and shrub trimming Woodstock IL" width="900" height="1200" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Lawn Clean-Up</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="lawn" data-label="Shrub Trimming · Before">
+        <img src="images/lawn_cleanup_2.jpg" alt="Overgrown shrubs before trimming Woodstock IL" width="900" height="1200" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Shrub Trimming · Before</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="lawn" data-label="Shrub Trimming · Before">
+        <img src="images/lawn_cleanup_3.jpg" alt="Overgrown bushes before lawn cleanup McHenry County" width="900" height="1200" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Shrub Trimming · Before</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="lawn" data-label="Lawn Clean-Up · Before">
+        <img src="images/lawn_cleanup_4.jpg" alt="Yard before cleanup service Woodstock IL" width="900" height="1200" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Lawn Clean-Up · Before</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="lawn" data-label="Shrub Trimming · During">
+        <img src="images/lawn_cleanup_5.jpg" alt="Shrub trimming in progress Woodstock IL" width="900" height="1200" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Shrub Trimming · During</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="lawn" data-label="Lawn Clean-Up · After">
+        <img src="images/lawn_cleanup_6.jpg" alt="Clean yard after lawn cleanup service McHenry County" width="900" height="1200" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Lawn Clean-Up · After</span></div>
+      </div>
+
   </div>
 
   <div class="no-results" id="noResults">
@@ -540,7 +581,7 @@ const revealObs = new IntersectionObserver(entries => {
 reveals.forEach(el => revealObs.observe(el));
 
 // ── COUNT BADGES ──
-const cats = ['siding','windows','gutters','patio','lawn'];
+const cats = ['siding','windows','gutters','patio','roofwash','lawn'];
 cats.forEach(cat => {
   const count = document.querySelectorAll(`.photo-item[data-cat="${cat}"]`).length;
   const el = document.getElementById(`count-${cat}`);
