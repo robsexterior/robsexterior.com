@@ -298,11 +298,12 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
 
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filterBar">
-  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count" id="count-all">29</span></button>
+  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count" id="count-all">28</span></button>
   <button class="filter-btn" data-filter="siding">Soft Washing <span class="filter-count" id="count-siding">0</span></button>
   <button class="filter-btn" data-filter="windows">Window Cleaning <span class="filter-count" id="count-windows">0</span></button>
   <button class="filter-btn" data-filter="gutters">Gutter Cleaning <span class="filter-count" id="count-gutters">0</span></button>
   <button class="filter-btn" data-filter="patio">Pressure Washing <span class="filter-count" id="count-patio">0</span></button>
+  <button class="filter-btn" data-filter="lawn">Lawn Clean-Up <span class="filter-count" id="count-lawn">0</span></button>
 </div>
 
 <!-- GALLERY -->
@@ -359,14 +360,14 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
       <div class="photo-overlay"><span class="photo-tag">Gutter Cleaning · Before</span></div>
     </div>
 
-    <div class="photo-item reveal" data-cat="gutters" data-label="Gutter Detail">
-      <img src="images/garage%201.jpeg" alt="Gutter inspection on residential garage McHenry County IL" width="900" height="1200" loading="lazy"/>
-      <div class="photo-overlay"><span class="photo-tag">Gutter Detail</span></div>
+    <div class="photo-item reveal" data-cat="siding" data-label="Soft Wash · Before">
+      <img src="images/garage%201.jpeg" alt="House siding before soft washing McHenry County IL" width="900" height="1200" loading="lazy"/>
+      <div class="photo-overlay"><span class="photo-tag">Soft Wash · Before</span></div>
     </div>
 
-    <div class="photo-item reveal" data-cat="gutters" data-label="Gutter Detail · After">
-      <img src="images/garage%202.jpeg" alt="Clean gutters after service Woodstock IL" width="900" height="1200" loading="lazy"/>
-      <div class="photo-overlay"><span class="photo-tag">Gutter Detail · After</span></div>
+    <div class="photo-item reveal" data-cat="siding" data-label="Soft Wash · After">
+      <img src="images/garage%202.jpeg" alt="Clean siding after soft washing service Woodstock IL" width="900" height="1200" loading="lazy"/>
+      <div class="photo-overlay"><span class="photo-tag">Soft Wash · After</span></div>
     </div>
 
     <!-- Soft Wash Before -->
@@ -539,7 +540,7 @@ const revealObs = new IntersectionObserver(entries => {
 reveals.forEach(el => revealObs.observe(el));
 
 // ── COUNT BADGES ──
-const cats = ['siding','windows','gutters','patio'];
+const cats = ['siding','windows','gutters','patio','lawn'];
 cats.forEach(cat => {
   const count = document.querySelectorAll(`.photo-item[data-cat="${cat}"]`).length;
   const el = document.getElementById(`count-${cat}`);
