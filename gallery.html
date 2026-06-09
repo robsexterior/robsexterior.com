@@ -278,7 +278,6 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
     <li><a href="index.html#services">Services</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="gallery.html" class="active">Gallery</a></li>
-    <li><a href="index.html#testimonials">Reviews</a></li>
     <li><a href="sms:+18154510106" class="nav-cta">Text for a Quote</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -579,6 +578,8 @@ const revealObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.01, rootMargin: '0px 0px 200px 0px' });
 reveals.forEach(el => revealObs.observe(el));
+// Make all photo items visible immediately so filters work correctly
+document.querySelectorAll('.photo-item').forEach(el => el.classList.add('visible'));
 
 // ── COUNT BADGES ──
 const cats = ['siding','windows','gutters','patio','roofwash','lawn'];
