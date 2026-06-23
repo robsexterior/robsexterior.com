@@ -297,13 +297,14 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
 
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filterBar">
-  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count" id="count-all">37</span></button>
+  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count" id="count-all">43</span></button>
   <button class="filter-btn" data-filter="siding">Soft Washing <span class="filter-count" id="count-siding">0</span></button>
   <button class="filter-btn" data-filter="windows">Window Cleaning <span class="filter-count" id="count-windows">0</span></button>
   <button class="filter-btn" data-filter="gutters">Gutter Cleaning <span class="filter-count" id="count-gutters">0</span></button>
   <button class="filter-btn" data-filter="patio">Pressure Washing <span class="filter-count" id="count-patio">0</span></button>
   <button class="filter-btn" data-filter="roofwash">Roof Washing <span class="filter-count" id="count-roofwash">0</span></button>
   <button class="filter-btn" data-filter="lawn">Lawn Clean-Up <span class="filter-count" id="count-lawn">0</span></button>
+  <button class="filter-btn" data-filter="deck">Deck Wash &amp; Staining <span class="filter-count" id="count-deck">0</span></button>
 </div>
 
 <!-- GALLERY -->
@@ -499,6 +500,32 @@ footer{background:var(--navy-dark);border-top:2px solid var(--gold);padding:56px
         <div class="photo-overlay"><span class="photo-tag">Lawn Clean-Up · After</span></div>
       </div>
 
+      <!-- Deck wash & staining -->
+      <div class="photo-item reveal" data-cat="deck" data-label="Deck Stain · Before & After">
+        <img src="images/deckstain2.jpg" alt="Deck staining before and after Woodstock IL — Rob's Exterior Services" width="800" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Deck Stain · Before &amp; After</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="deck" data-label="Deck Staining · After">
+        <img src="images/deckstain.jpg" alt="Professional deck staining result Woodstock IL" width="800" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Deck Stain · Before &amp; After</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="deck" data-label="Deck Staining · In Progress">
+        <img src="images/deckstain4.jpg" alt="Deck staining in progress McHenry County IL" width="800" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Deck Staining · In Progress</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="deck" data-label="Deck Wash · Before & After">
+        <img src="images/Deck_wash.jpg" alt="Deck wash before and after Woodstock IL" width="800" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Deck Wash · Before &amp; After</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="deck" data-label="Deck Wash · Before & After">
+        <img src="images/deckwash2.jpg" alt="Deck pressure washing before and after McHenry County" width="800" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Deck Wash · Before &amp; After</span></div>
+      </div>
+      <div class="photo-item reveal" data-cat="deck" data-label="Deck Wash · Before & After">
+        <img src="images/deckwash3.jpg" alt="Deck wash mold and algae removal Woodstock IL" width="800" height="600" loading="lazy"/>
+        <div class="photo-overlay"><span class="photo-tag">Deck Wash · Before &amp; After</span></div>
+      </div>
+
   </div>
 
   <div class="no-results" id="noResults">
@@ -582,7 +609,7 @@ reveals.forEach(el => revealObs.observe(el));
 document.querySelectorAll('.photo-item').forEach(el => el.classList.add('visible'));
 
 // ── COUNT BADGES ──
-const cats = ['siding','windows','gutters','patio','roofwash','lawn'];
+const cats = ['siding','windows','gutters','patio','roofwash','lawn','deck'];
 cats.forEach(cat => {
   const count = document.querySelectorAll(`.photo-item[data-cat="${cat}"]`).length;
   const el = document.getElementById(`count-${cat}`);
